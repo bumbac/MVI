@@ -57,23 +57,19 @@ dataset. [paperswithcode.com](https://paperswithcode.com/task/speech-enhancement
 
 **Results:**
 
-
-
-
-
-
-Training from scratch, 5 epochs:
+### Training from scratch
+5 epochs:
 
     INFO:root:Generator loss: 1.0044530600309372, Discriminator loss: 0.00038591690390603616
     INFO:root:Generator loss: 0.9820897907018662, Discriminator loss: 0.0005988561392541669
     INFO:root:Generator loss: 0.9860841780900955, Discriminator loss: 0.0006284933011556859
     INFO:root:Generator loss: 0.9680219531059265, Discriminator loss: 0.00022628391907346667
     INFO:root:Generator loss: 1.0031898647546769, Discriminator loss: 0.000825498571521166
-Evaluation:
+**Evaluation:**
 
     pesq:  1.0641768157482148 csig:  1.4174080517807113 cbak:  1.3879450216314246 covl:  1.1703623086346744 ssnr:  -1.884990330774863 stoi:  0.3174120471978805
 
-Training from scratch, 50 epochs:
+50 epochs:
 
     INFO:root:Generator loss: 0.9738902419805526, Discriminator loss: 0.0004084870933866114
     INFO:root:Generator loss: 0.9725780338048935, Discriminator loss: 0.0018327188306102471
@@ -117,37 +113,30 @@ Training from scratch, 50 epochs:
     INFO:root:Generator loss: 1.0918779402971268, Discriminator loss: 0.0001956570455149631
     INFO:root:Generator loss: 1.0473725110292436, Discriminator loss: 9.093053740798496e-05
 
-Evaluation:
+**Evaluation:**
 
     pesq:  1.0587524145841598 csig:  1.0777227792749267 cbak:  1.418621684416482 covl:  1.0125614981105242 ssnr:  -1.4984374963315985 stoi:  0.1859480103555091
 
-Training on pretrained model from authors:
+### Pretrained model from authors:
 
-tba
-Evaluation:
-
-tba
-
-Pretrained model from authors:
-
-Evaluation:
+**Evaluation:**
 
     pesq:  1.2303554445505143 csig:  1.412312253735375 cbak:  1.4103906610004537 covl:  1.3146698547489466 ssnr:  -2.0189492452763718 stoi:  0.2451594971056267
 
 
-Fine-tuning on pretrained model from authors:
+### Fine-tuning on pretrained model from authors:
 
-    
+5 epochs
+
     INFO:root:Generator loss: 0.9803555607795715, Discriminator loss: 0.004497478474513627
     INFO:root:Generator loss: 0.9839551508426666, Discriminator loss: 0.0002254387409038827
     INFO:root:Generator loss: 1.0049857378005982, Discriminator loss: 0.00017971180259337415
     INFO:root:Generator loss: 0.9877994626760482, Discriminator loss: 0.0001390831252138014
     INFO:root:Generator loss: 0.9810490518808365, Discriminator loss: 0.0002643458637066942
 
+**Evaluation:**
 
-Evaluation:
 
-    
     pesq:  1.0351979941129685 csig:  1.152096069765623 cbak:  1.4057466341602713 covl:  1.054459746950025 ssnr:  -1.8605812995926392 stoi:  0.2338759234258574
 
 

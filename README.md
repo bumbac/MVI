@@ -4,15 +4,12 @@
 Compare the quality of audio recording of Spanish speakers enhanced by CMGAN model.
 I will compare inferred data from :
 
-    1. Model pretrained on english speakers as provided by authors of the CMGAN.
-    2. Fine-tuned pretrained model with Spanish speakers.
-    3. Model trained from scratch using custom data.
+1. Model pretrained on english speakers as provided by authors of the CMGAN.
+2. Fine-tuned pretrained model with Spanish speakers.
+3. Model trained from scratch using custom data.
 
 
-**Model:**
-
-CMGAN: Conformer-Based Metric-GAN for Monaural Speech Enhancement
-Sherif Abdulatif, Ruizhe Cao, Bin Yang
+**Model:** CMGAN: Conformer-Based Metric-GAN for Monaural Speech Enhancement, *Sherif Abdulatif, Ruizhe Cao, Bin Yang*
 
 - Paper: [ArXiv](https://arxiv.org/abs/2209.11112)
 - Implementation: [GitHub](https://github.com/SherifAbdulatif/CMGAN)
@@ -48,16 +45,17 @@ dataset. [paperswithcode.com](https://paperswithcode.com/task/speech-enhancement
 
 1. Preprocess custom data.
 2. Train model from scratch using custom data.
-3. Fine-tune existing pretrained model using custom data.
+3. [Fine-tune](https://gitlab.fit.cvut.cz/sutymate/mvi-sp/-/blob/master/src/finetrain.py) existing pretrained model using custom data.
 4. Evaluate models with PESQ and STOI metrics:
-    5. Scratch.
-    6. Fine-tuned.
-    7. Pre-trained.
+
+    - Scratch.
+    - Fine-tuned.
+    - Pre-trained.
 
 3. Compare results.
 4. Prepare [samples](https://drive.google.com/drive/folders/1FXIaY9Mi-1CrgUJFrcU7idJe7hoT3eEF?usp=share_link):
-    5. Clean audio.
-    6. Noisy audio.
-    7. Enhanced with different models.
+    - Clean audio.
+    - Noisy audio.
+    - Enhanced with different models.
 
 [Final Report](https://gitlab.fit.cvut.cz/sutymate/mvi-sp/-/blob/master/report.pdf)

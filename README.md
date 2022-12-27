@@ -71,42 +71,7 @@ dataset. [paperswithcode.com](https://paperswithcode.com/task/speech-enhancement
 
 50 epochs:
 
-    INFO:root:Generator loss: 0.9738902419805526, Discriminator loss: 0.0004084870933866114
-    INFO:root:Generator loss: 0.9725780338048935, Discriminator loss: 0.0018327188306102471
-    INFO:root:Generator loss: 0.9634257942438126, Discriminator loss: 0.0022692547257975094
-    INFO:root:Generator loss: 1.005217006802559, Discriminator loss: 0.0013587505243776831
-    INFO:root:Generator loss: 0.9515760540962219, Discriminator loss: 0.001605068576100166
-    INFO:root:Generator loss: 0.9593596309423447, Discriminator loss: 0.000416731200311915
-    INFO:root:Generator loss: 0.9414912819862366, Discriminator loss: 0.0004748937507429218
-    INFO:root:Generator loss: 0.9729780316352844, Discriminator loss: 0.00030636623214377325
-    INFO:root:Generator loss: 1.0468609809875489, Discriminator loss: 0.00048415454821224555
-    INFO:root:Generator loss: 1.0191098541021346, Discriminator loss: 0.0001870904319730471
-    INFO:root:Generator loss: 1.0200064212083817, Discriminator loss: 0.00029639989652423536
-    INFO:root:Generator loss: 1.0671175956726073, Discriminator loss: 0.0001523649574664887
-    INFO:root:Generator loss: 1.0065761804580688, Discriminator loss: 0.00010405286220702692
-    INFO:root:Generator loss: 0.995909008383751, Discriminator loss: 0.008662087500124472
-    INFO:root:Generator loss: 1.0159991353750228, Discriminator loss: 0.000182370871425519
-    INFO:root:Generator loss: 1.0039551854133606, Discriminator loss: 0.00012664271698668018
-    INFO:root:Generator loss: 1.0257580250501632, Discriminator loss: 0.00011018243333182909
-    INFO:root:Generator loss: 1.068786734342575, Discriminator loss: 0.00014884724787407323
-    INFO:root:Generator loss: 1.0456076204776763, Discriminator loss: 0.00015389831041829894
-    INFO:root:Generator loss: 1.0347481161355971, Discriminator loss: 0.0001171350188087672
-    INFO:root:Generator loss: 1.0478502482175827, Discriminator loss: 7.005644611126626e-05
-    INFO:root:Generator loss: 1.0798900127410889, Discriminator loss: 0.0012122564669880375
-    INFO:root:Generator loss: 1.041588193178177, Discriminator loss: 0.0036577262269929635
-    INFO:root:Generator loss: 1.074593186378479, Discriminator loss: 0.0002621836891194107
-    INFO:root:Generator loss: 1.0486982107162475, Discriminator loss: 6.42522727503092e-05
-    INFO:root:Generator loss: 1.0700945883989335, Discriminator loss: 0.00033098831299867016
-    INFO:root:Generator loss: 1.0645505845546723, Discriminator loss: 5.4103344064060364e-05
-    INFO:root:Generator loss: 1.074211984872818, Discriminator loss: 0.00010944717705569928
-    INFO:root:Generator loss: 1.072346466779709, Discriminator loss: 0.00018734835957729957
-    INFO:root:Generator loss: 1.0560636162757873, Discriminator loss: 0.00010278059180564014
-    INFO:root:Generator loss: 1.0399885863065719, Discriminator loss: 0.0001253332316991873
-    INFO:root:Generator loss: 1.0597063571214675, Discriminator loss: 0.0001746055782859912
-    INFO:root:Generator loss: 1.0671822249889373, Discriminator loss: 0.00010207884170085891
-    INFO:root:Generator loss: 1.0756561845541, Discriminator loss: 0.00012279253478482134
-    INFO:root:Generator loss: 1.0512960582971573, Discriminator loss: 0.00010804541416291613
-    INFO:root:Generator loss: 1.0466693550348283, Discriminator loss: 0.0006358093021844979
+    ...
     INFO:root:Generator loss: 1.0753205329179765, Discriminator loss: 0.005824737032526173
     INFO:root:Generator loss: 1.0676013618707656, Discriminator loss: 0.0008540094800991938
     INFO:root:Generator loss: 1.0410430133342743, Discriminator loss: 0.00013016909961152123
@@ -116,6 +81,20 @@ dataset. [paperswithcode.com](https://paperswithcode.com/task/speech-enhancement
 **Evaluation:**
 
     pesq:  1.0587524145841598 csig:  1.0777227792749267 cbak:  1.418621684416482 covl:  1.0125614981105242 ssnr:  -1.4984374963315985 stoi:  0.1859480103555091
+
+50 epochs LR1e-8
+
+    ...
+    INFO:root:Epoch 31, Step 168, loss: 1.2215607166290283, disc_loss: 0.37016499042510986
+    INFO:root:Epoch 31, Step 169, loss: 1.4389499425888062, disc_loss: 0.3658515512943268
+    INFO:root:Epoch 31, Step 170, loss: 1.48197340965271, disc_loss: 0.6567169427871704
+    INFO:root:Epoch 31, Step 171, loss: 0.6764488220214844, disc_loss: 0.3552115559577942
+    INFO:root:Epoch 31, Step 172, loss: 1.4702340364456177, disc_loss: 0.6860331296920776
+
+**Evaluation:**
+
+    pesq:  1.1032311558723449 csig:  1.2620735504715674 cbak:  1.3549868431609529 covl:  1.172604710565108 ssnr:  -2.0698603452510556 stoi:  0.2548194037686168
+
 
 ### Pretrained model from authors:
 
@@ -139,7 +118,12 @@ dataset. [paperswithcode.com](https://paperswithcode.com/task/speech-enhancement
 
     pesq:  1.0351979941129685 csig:  1.152096069765623 cbak:  1.4057466341602713 covl:  1.054459746950025 ssnr:  -1.8605812995926392 stoi:  0.2338759234258574
 
+17 epochs LR1e-8
 
+**Evaluation:**
+
+    pesq:  1.2344390451908112 csig:  1.4126004655629687 cbak:  1.4128319739965893 covl:  1.3169226579917268 ssnr:  -2.0149663413693455 stoi:  0.24508382519855107
+    
 
 **Current state:**
 1. Successfully processed sample data with pretrained model for comparison.

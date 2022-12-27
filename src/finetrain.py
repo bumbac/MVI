@@ -7,12 +7,13 @@ from utils import *
 import logging
 from torchinfo import summary
 import argparse
+import pickle5
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--epochs", type=int, default=120, help="number of epochs of training")
 parser.add_argument("--batch_size", type=int, default=4)
-parser.add_argument("--log_interval", type=int, default=500)
-parser.add_argument("--decay_epoch", type=int, default=30, help="epoch from which to start lr decay")
+parser.add_argument("--log_interval", type=int, default=1)
+parser.add_argument("--decay_epoch", type=int, default=10, help="epoch from which to start lr decay")
 parser.add_argument("--init_lr", type=float, default=5e-4, help="initial learning rate")
 parser.add_argument("--cut_len", type=int, default=16000*2, help="cut length, default is 2 seconds in denoise "
                                                                  "and dereverberation")
@@ -20,8 +21,10 @@ parser.add_argument("--data_dir", type=str, default='dir to VCTK-DEMAND dataset'
                     help="dir of VCTK+DEMAND dataset")
 parser.add_argument("--save_model_dir", type=str, default='./saved_model',
                     help="dir of saved model")
-parser.add_argument("--pretrained_model_path", type=str, default='./best_ckpt/ckpt',
+parser.add_argument("--pretrained_model_path", type=str, default=None,
+#'./best_ckpt/ckpt',
                     help="path for pretrained model")
+parser.add_argument("--loss_file", type=str, default='./losses/loss', help="path for pickle losses")
 parser.add_argument("--loss_weights", type=list, default=[0.1, 0.9, 0.2, 0.05],
                     help="weights of RI components, magnitude, time loss, and Metric Disc")
 args = parser.parse_args()
@@ -29,20 +32,27 @@ logging.basicConfig(level=logging.INFO)
 
 
 class Trainer:
-    def __init__(self, train_ds, test_ds, pretrained_model_path=None):
+    def __init__(self, train_ds, test_ds, pretrained_model_path, loss_file):
         self.n_fft = 400
         self.hop = 100
         self.train_ds = train_ds
         self.test_ds = test_ds
         self.model = TSCNet(num_channel=64, num_features=self.n_fft // 2 + 1).cuda()
         if pretrained_model_path:
-            model.load_state_dict((torch.load(model_path)))
+            self.model.load_state_dict((torch.load(pretrained_model_path)))
         summary(self.model, [(1, 2, args.cut_len//self.hop+1, int(self.n_fft/2)+1)])
         self.discriminator = discriminator.Discriminator(ndf=16).cuda()
         summary(self.discriminator, [(1, 1, int(self.n_fft/2)+1, args.cut_len//self.hop+1),
                                      (1, 1, int(self.n_fft/2)+1, args.cut_len//self.hop+1)])
         self.optimizer = torch.optim.AdamW(self.model.parameters(), lr=args.init_lr)
         self.optimizer_disc = torch.optim.AdamW(self.discriminator.parameters(), lr=2*args.init_lr)
+        
+        self.loss_file = loss_file
+        self.losses = [[], [], [], []]
+
+    def get_lr(self, optimizer):
+      for param_group in optimizer.param_groups:
+        return param_group['lr']
 
     def train_step(self, batch):
         clean = batch[0].cuda()
@@ -184,9 +194,21 @@ class Trainer:
             for idx, batch in enumerate(self.train_ds):
                 step = idx + 1
                 loss, disc_loss = self.train_step(batch)
+                lr_gen = self.get_lr(self.optimizer)
+                lr_disc = self.get_lr(self.optimizer_disc)
+                print("LOSSES:", loss, disc_loss, "LR", lr_gen, lr_disc)
+                self.losses[0].append(loss)
+                self.losses[1].append(disc_loss)
                 template = 'Epoch {}, Step {}, loss: {}, disc_loss: {}'
                 if (step % args.log_interval) == 0:
                     logging.info(template.format(epoch, step, loss, disc_loss))
+            with open(self.loss_file, "wb") as f:
+                print(self.losses)
+                lr_gen = self.get_lr(self.optimizer)
+                lr_disc = self.get_lr(self.optimizer_disc)
+                self.losses[2].append(lr_gen)
+                self.losses[3].append(lr_disc)
+                pickle5.dump(self.losses, f)
             gen_loss = self.test()
             path = os.path.join(args.save_model_dir, 'CMGAN_epoch_' + str(epoch) + '_' + str(gen_loss)[:5])
             if not os.path.exists(args.save_model_dir):
@@ -201,7 +223,7 @@ def main():
     available_gpus = [torch.cuda.get_device_name(i) for i in range(torch.cuda.device_count())]
     print(available_gpus)
     train_ds, test_ds = dataloader.load_data(args.data_dir, args.batch_size, 2, args.cut_len)
-    trainer = Trainer(train_ds, test_ds, args.pretrained_model_path)
+    trainer = Trainer(train_ds, test_ds, args.pretrained_model_path, args.loss_file)
     trainer.train()
 
 
